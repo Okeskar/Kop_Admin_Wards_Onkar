@@ -1,3 +1,4 @@
+Interactive Map Made by Onkar Keskar!
 <!doctype html>
 <html lang="en">
     <head>
@@ -55,7 +56,7 @@
             } else {
               highlightLayer.setStyle({
                 fillColor: '#fffb00',
-                fillOpacity: 1
+                fillOpacity: 0
               });
             }
             highlightLayer.openPopup();
@@ -88,7 +89,7 @@
         map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
         var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             pane: 'pane_GoogleSatellite_0',
-            opacity: 0.0,
+            opacity: 1.0,
             attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
             minZoom: 1,
             maxZoom: 28,
