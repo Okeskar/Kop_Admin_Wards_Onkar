@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Admin Wards of Kolhapur</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/Boundary_1.js"></script>
+        <script src="data/Admin_Ward_2.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#fffb00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#fffb00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Boundary_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Boundary_1_0() {
+            return {
+                pane: 'pane_Boundary_1',
+                opacity: 1,
+                color: 'rgba(191,255,0,1.0)',
+                dashArray: '10,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Boundary_1');
+        map.getPane('pane_Boundary_1').style.zIndex = 401;
+        map.getPane('pane_Boundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_Boundary_1 = new L.geoJson(json_Boundary_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Boundary_1',
+            layerName: 'layer_Boundary_1',
+            pane: 'pane_Boundary_1',
+            onEachFeature: pop_Boundary_1,
+            style: style_Boundary_1_0,
+        });
+        bounds_group.addLayer(layer_Boundary_1);
+        map.addLayer(layer_Boundary_1);
+        function pop_Admin_Ward_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Ward_Name</th>\
+                        <td>' + (feature.properties['Ward_Name'] !== null ? autolinker.link(feature.properties['Ward_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Area (Sq. Mt.)</th>\
+                        <td>' + (feature.properties['Area-Sq.Mt'] !== null ? autolinker.link(feature.properties['Area-Sq.Mt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Region</th>\
+                        <td>' + (feature.properties['Region'] !== null ? autolinker.link(feature.properties['Region'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Admin_Ward_2_0(feature) {
+            switch(String(feature.properties['Region'])) {
+                case 'North Region':
+                    return {
+                pane: 'pane_Admin_Ward_2',
+                opacity: 1,
+                color: 'rgba(232,78,153,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'South Region':
+                    return {
+                pane: 'pane_Admin_Ward_2',
+                opacity: 1,
+                color: 'rgba(0,0,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Admin_Ward_2');
+        map.getPane('pane_Admin_Ward_2').style.zIndex = 402;
+        map.getPane('pane_Admin_Ward_2').style['mix-blend-mode'] = 'normal';
+        var layer_Admin_Ward_2 = new L.geoJson(json_Admin_Ward_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Admin_Ward_2',
+            layerName: 'layer_Admin_Ward_2',
+            pane: 'pane_Admin_Ward_2',
+            onEachFeature: pop_Admin_Ward_2,
+            style: style_Admin_Ward_2_0,
+        });
+        bounds_group.addLayer(layer_Admin_Ward_2);
+        map.addLayer(layer_Admin_Ward_2);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Admin Wards of Kolhapur</h2>';
+            };
+            title.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Admin_Ward<br /><table><tr><td style="text-align: center;"><img src="legend/Admin_Ward_2_NorthRegion0.png" /></td><td>North Region</td></tr><tr><td style="text-align: center;"><img src="legend/Admin_Ward_2_SouthRegion1.png" /></td><td>South Region</td></tr></table>': layer_Admin_Ward_2,'<img src="legend/Boundary_1.png" /> Boundary': layer_Boundary_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Admin_Ward_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Ward_Name'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'Arial Narrow\', sans-serif;">' + layer.feature.properties['Ward_Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Admin_Ward_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_Admin_Ward_2,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Ward_Name'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Ward_Name": "str","Region": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+        var i = 0;
+        layer_Admin_Ward_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Ward_Name'] !== null?String('<div style="color: #000000; font-size: 8pt; font-weight: bold; font-family: \'Arial Narrow\', sans-serif;">' + layer.feature.properties['Ward_Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Admin_Ward_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Ward_Name = document.createElement('div');
+            div_Ward_Name.id = "div_Ward_Name";
+            div_Ward_Name.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Ward_Name);
+            sel_Ward_Name = document.createElement('select');
+            sel_Ward_Name.multiple = true;
+            sel_Ward_Name.size = 10;
+            sel_Ward_Name.id = "sel_Ward_Name";
+            var Ward_Name_options_str = "<option value='' unselected></option>";
+            sel_Ward_Name.onchange = function(){filterFunc()};
+            Ward_Name_options_str  += '<option value="Apatenagar-Tulajabhavani">Apatenagar-Tulajabhavani</option>';
+            Ward_Name_options_str  += '<option value="Balram Colony">Balram Colony</option>';
+            Ward_Name_options_str  += '<option value="Bazar Gate">Bazar Gate</option>';
+            Ward_Name_options_str  += '<option value="Bhosalewadi-Kadamwadi">Bhosalewadi-Kadamwadi</option>';
+            Ward_Name_options_str  += '<option value="Bindu Chouk">Bindu Chouk</option>';
+            Ward_Name_options_str  += '<option value="Budh Garden">Budh Garden</option>';
+            Ward_Name_options_str  += '<option value="Chandreswar">Chandreswar</option>';
+            Ward_Name_options_str  += '<option value="Circuit house">Circuit house</option>';
+            Ward_Name_options_str  += '<option value="Commerce College">Commerce College</option>';
+            Ward_Name_options_str  += '<option value="Daulat Nagar">Daulat Nagar</option>';
+            Ward_Name_options_str  += '<option value="Dudhali Povelion">Dudhali Povelion</option>';
+            Ward_Name_options_str  += '<option value="Firangai">Firangai</option>';
+            Ward_Name_options_str  += '<option value="Jawahar Nagar">Jawahar Nagar</option>';
+            Ward_Name_options_str  += '<option value="Kadamwadi">Kadamwadi</option>';
+            Ward_Name_options_str  += '<option value="Kailashgadchi Swari Mandir">Kailashgadchi Swari Mandir</option>';
+            Ward_Name_options_str  += '<option value="Kalamba Filter House">Kalamba Filter House</option>';
+            Ward_Name_options_str  += '<option value="Kanan Nagar">Kanan Nagar</option>';
+            Ward_Name_options_str  += '<option value="Kanerkar Nagar">Kanerkar Nagar</option>';
+            Ward_Name_options_str  += '<option value="Kasaba Bawada Hanuman Talav">Kasaba Bawada Hanuman Talav</option>';
+            Ward_Name_options_str  += '<option value="Kasaba Bawada Povelion">Kasaba Bawada Povelion</option>';
+            Ward_Name_options_str  += '<option value="Kasaba Bawada Purv Baju">Kasaba Bawada Purv Baju</option>';
+            Ward_Name_options_str  += '<option value="Kholkhandoba">Kholkhandoba</option>';
+            Ward_Name_options_str  += '<option value="Kokane Math">Kokane Math</option>';
+            Ward_Name_options_str  += '<option value="Kom- Krantisinh Nana Patil Nagar- Jivaba Nana Park">Kom- Krantisinh Nana Patil Nagar- Jivaba Nana Park</option>';
+            Ward_Name_options_str  += '<option value="Laxmi Vilas Palace">Laxmi Vilas Palace</option>';
+            Ward_Name_options_str  += '<option value="Laxtirth Vasahat">Laxtirth Vasahat</option>';
+            Ward_Name_options_str  += '<option value="Mahadik Vasahat">Mahadik Vasahat</option>';
+            Ward_Name_options_str  += '<option value="Mahalaxmi Mandir">Mahalaxmi Mandir</option>';
+            Ward_Name_options_str  += '<option value="Mangeshkar Nagar">Mangeshkar Nagar</option>';
+            Ward_Name_options_str  += '<option value="Mukt-Sainik Vasahat">Mukt-Sainik Vasahat</option>';
+            Ward_Name_options_str  += '<option value="Nagala Park">Nagala Park</option>';
+            Ward_Name_options_str  += '<option value="Nathagole Talim">Nathagole Talim</option>';
+            Ward_Name_options_str  += '<option value="Neharu Nagar">Neharu Nagar</option>';
+            Ward_Name_options_str  += '<option value="Padmaraje Garden">Padmaraje Garden</option>';
+            Ward_Name_options_str  += '<option value="Panchganga Talim">Panchganga Talim</option>';
+            Ward_Name_options_str  += '<option value="Panjarpol">Panjarpol</option>';
+            Ward_Name_options_str  += '<option value="Phulewadi">Phulewadi</option>';
+            Ward_Name_options_str  += '<option value="Phulewadi Ring Road">Phulewadi Ring Road</option>';
+            Ward_Name_options_str  += '<option value="Police Line">Police Line</option>';
+            Ward_Name_options_str  += '<option value="Pratibha Nagar">Pratibha Nagar</option>';
+            Ward_Name_options_str  += '<option value="Raigad Colony-Baba Jarag nagar">Raigad Colony-Baba Jarag nagar</option>';
+            Ward_Name_options_str  += '<option value="Rajarampuri">Rajarampuri</option>';
+            Ward_Name_options_str  += '<option value="Rajarampuri Exstention">Rajarampuri Exstention</option>';
+            Ward_Name_options_str  += '<option value="Rajarampuri-Tawannappa Patane Highschool">Rajarampuri-Tawannappa Patane Highschool</option>';
+            Ward_Name_options_str  += '<option value="Rajashri Chattrapati Shahu Market Yard">Rajashri Chattrapati Shahu Market Yard</option>';
+            Ward_Name_options_str  += '<option value="Rajendra Nagar">Rajendra Nagar</option>';
+            Ward_Name_options_str  += '<option value="Rajlaxmi Nagar">Rajlaxmi Nagar</option>';
+            Ward_Name_options_str  += '<option value="Ramanandanagar-Jaragnagar">Ramanandanagar-Jaragnagar</option>';
+            Ward_Name_options_str  += '<option value="Ramanmala">Ramanmala</option>';
+            Ward_Name_options_str  += '<option value="Rankala Stand">Rankala Stand</option>';
+            Ward_Name_options_str  += '<option value="Rankala Talav">Rankala Talav</option>';
+            Ward_Name_options_str  += '<option value="Ruikar Colony">Ruikar Colony</option>';
+            Ward_Name_options_str  += '<option value="Sadar Bazar">Sadar Bazar</option>';
+            Ward_Name_options_str  += '<option value="Sahshkiy Madyavarti Karyalay">Sahshkiy Madyavarti Karyalay</option>';
+            Ward_Name_options_str  += '<option value="Saix Exstention">Saix Exstention</option>';
+            Ward_Name_options_str  += '<option value="Salokhe Nagar">Salokhe Nagar</option>';
+            Ward_Name_options_str  += '<option value="Sambhaji nagar">Sambhaji nagar</option>';
+            Ward_Name_options_str  += '<option value="Samrat Nagar">Samrat Nagar</option>';
+            Ward_Name_options_str  += '<option value="Sanbhaji Nagar Bus Stop">Sanbhaji Nagar Bus Stop</option>';
+            Ward_Name_options_str  += '<option value="Saneguruji Vasahat">Saneguruji Vasahat</option>';
+            Ward_Name_options_str  += '<option value="Shahu College">Shahu College</option>';
+            Ward_Name_options_str  += '<option value="Shahupuri Talim">Shahupuri Talim</option>';
+            Ward_Name_options_str  += '<option value="Shastri Nagar- Jawaharnagar">Shastri Nagar- Jawaharnagar</option>';
+            Ward_Name_options_str  += '<option value="Shivaji Park">Shivaji Park</option>';
+            Ward_Name_options_str  += '<option value="Shivaji Uddyam nagar">Shivaji Uddyam nagar</option>';
+            Ward_Name_options_str  += '<option value="Shivaji Vidhyapeeth-Krushi Mahavidhyalay">Shivaji Vidhyapeeth-Krushi Mahavidhyalay</option>';
+            Ward_Name_options_str  += '<option value="Sidhala Garden">Sidhala Garden</option>';
+            Ward_Name_options_str  += '<option value="Sidharth Nagar">Sidharth Nagar</option>';
+            Ward_Name_options_str  += '<option value="Subhash Nagar">Subhash Nagar</option>';
+            Ward_Name_options_str  += '<option value="Sugar Mill">Sugar Mill</option>';
+            Ward_Name_options_str  += '<option value="Surve Nagar">Surve Nagar</option>';
+            Ward_Name_options_str  += '<option value="Swatantra Sainik Vasahat">Swatantra Sainik Vasahat</option>';
+            Ward_Name_options_str  += '<option value="Tadakadil Talim">Tadakadil Talim</option>';
+            Ward_Name_options_str  += '<option value="Takala Khan Mali Colony">Takala Khan Mali Colony</option>';
+            Ward_Name_options_str  += '<option value="Tapovan">Tapovan</option>';
+            Ward_Name_options_str  += '<option value="Tarabai Park">Tarabai Park</option>';
+            Ward_Name_options_str  += '<option value="Temblaiwadi">Temblaiwadi</option>';
+            Ward_Name_options_str  += '<option value="Tresari Office">Tresari Office</option>';
+            Ward_Name_options_str  += '<option value="Vikram Nagar">Vikram Nagar</option>';
+            Ward_Name_options_str  += '<option value="Vinus Corner">Vinus Corner</option>';
+            Ward_Name_options_str  += '<option value="Yadavnagar">Yadavnagar</option>';
+            sel_Ward_Name.innerHTML = Ward_Name_options_str;
+            div_Ward_Name.appendChild(sel_Ward_Name);
+            var lab_Ward_Name = document.createElement('div');
+            lab_Ward_Name.innerHTML = 'Ward_Name';
+            lab_Ward_Name.className = 'filterlabel';
+            div_Ward_Name.appendChild(lab_Ward_Name);
+            var reset_Ward_Name = document.createElement('div');
+            reset_Ward_Name.innerHTML = 'clear filter';
+            reset_Ward_Name.className = 'filterlabel';
+            reset_Ward_Name.onclick = function() {
+                var options = document.getElementById("sel_Ward_Name").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Ward_Name.appendChild(reset_Ward_Name);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Region = document.createElement('div');
+            div_Region.id = "div_Region";
+            div_Region.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Region);
+            sel_Region = document.createElement('select');
+            sel_Region.multiple = true;
+            sel_Region.size = 2;
+            sel_Region.id = "sel_Region";
+            var Region_options_str = "<option value='' unselected></option>";
+            sel_Region.onchange = function(){filterFunc()};
+            Region_options_str  += '<option value="North Region">North Region</option>';
+            Region_options_str  += '<option value="South Region">South Region</option>';
+            sel_Region.innerHTML = Region_options_str;
+            div_Region.appendChild(sel_Region);
+            var lab_Region = document.createElement('div');
+            lab_Region.innerHTML = 'Region';
+            lab_Region.className = 'filterlabel';
+            div_Region.appendChild(lab_Region);
+            var reset_Region = document.createElement('div');
+            reset_Region.innerHTML = 'clear filter';
+            reset_Region.className = 'filterlabel';
+            reset_Region.onclick = function() {
+                var options = document.getElementById("sel_Region").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Region.appendChild(reset_Region);
+        resetLabels([layer_Admin_Ward_2]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Admin_Ward_2]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Admin_Ward_2]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Admin_Ward_2]);
+        });
+        </script>
+    </body>
+</html>
