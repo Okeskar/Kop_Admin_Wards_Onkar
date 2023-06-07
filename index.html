@@ -397,7 +397,7 @@ Interactive Map Made by Onkar Keskar!
             document.getElementById("menu").appendChild(div_Ward_Name);
             sel_Ward_Name = document.createElement('select');
             sel_Ward_Name.multiple = true;
-            sel_Ward_Name.size = 5;
+            sel_Ward_Name.size = 15;
             sel_Ward_Name.id = "sel_Ward_Name";
             var Ward_Name_options_str = "<option value='' unselected></option>";
             sel_Ward_Name.onchange = function(){filterFunc()};
@@ -507,7 +507,7 @@ Interactive Map Made by Onkar Keskar!
             document.getElementById("menu").appendChild(div_Region);
             sel_Region = document.createElement('select');
             sel_Region.multiple = true;
-            sel_Region.size = 5;
+            sel_Region.size = 4;
             sel_Region.id = "sel_Region";
             var Region_options_str = "<option value='' unselected></option>";
             sel_Region.onchange = function(){filterFunc()};
