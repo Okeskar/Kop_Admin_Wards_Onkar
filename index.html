@@ -1,3 +1,4 @@
+Interactive Map made by Onkar Keskar!
 <!doctype html>
 <html lang="en">
     <head>
@@ -55,7 +56,7 @@
             } else {
               highlightLayer.setStyle({
                 fillColor: '#fffb00',
-                fillOpacity: 1
+                fillOpacity: 0
               });
             }
             highlightLayer.openPopup();
@@ -121,7 +122,7 @@
         function style_Boundary_1_0() {
             return {
                 pane: 'pane_Boundary_1',
-                opacity: 1,
+                opacity: 0,
                 color: 'rgba(191,255,0,1.0)',
                 dashArray: '10,5',
                 lineCap: 'square',
@@ -183,7 +184,7 @@
                 case 'North Region':
                     return {
                 pane: 'pane_Admin_Ward_2',
-                opacity: 1,
+                opacity: 0,
                 color: 'rgba(232,78,153,1.0)',
                 dashArray: '',
                 lineCap: 'square',
@@ -196,7 +197,7 @@
                 case 'South Region':
                     return {
                 pane: 'pane_Admin_Ward_2',
-                opacity: 1,
+                opacity: 0,
                 color: 'rgba(0,0,255,1.0)',
                 dashArray: '',
                 lineCap: 'square',
@@ -487,7 +488,7 @@
             lab_Ward_Name.className = 'filterlabel';
             div_Ward_Name.appendChild(lab_Ward_Name);
             var reset_Ward_Name = document.createElement('div');
-            reset_Ward_Name.innerHTML = 'clear filter';
+            reset_Ward_Name.innerHTML = 'Remove filter';
             reset_Ward_Name.className = 'filterlabel';
             reset_Ward_Name.onclick = function() {
                 var options = document.getElementById("sel_Ward_Name").options;
@@ -518,7 +519,7 @@
             lab_Region.className = 'filterlabel';
             div_Region.appendChild(lab_Region);
             var reset_Region = document.createElement('div');
-            reset_Region.innerHTML = 'clear filter';
+            reset_Region.innerHTML = 'Remove filter';
             reset_Region.className = 'filterlabel';
             reset_Region.onclick = function() {
                 var options = document.getElementById("sel_Region").options;
