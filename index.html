@@ -237,7 +237,7 @@ Interactive Map Made by Onkar Keskar!
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
-            text: 'Search Here',
+            text: 'Search',
             title: 'Testing'
         }).addTo(map);
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
@@ -276,7 +276,7 @@ Interactive Map Made by Onkar Keskar!
         col1.className="col9";
         col1.id = "mapWindow";
         col1.style.height = "100%";
-        col1.style.width = "95%";
+        col1.style.width = "80%";
         col1.style.display = "inline-block";
         var col2 = document.createElement('div');
         col2.className="col3";
@@ -379,7 +379,7 @@ Interactive Map Made by Onkar Keskar!
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Ward_Name'] !== null?String('<div style="color: #ff0000; font-size: 10pt; font-weight: bold; font-family: \'Arial Narrow\', sans-serif;">' + layer.feature.properties['Ward_Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Admin_Ward_2'});
+            layer.bindTooltip((layer.feature.properties['Ward_Name'] !== null?String('<div style="color: #ff0000; font-size: 8pt; font-weight: bold; font-family: \'Arial Narrow\', sans-serif;">' + layer.feature.properties['Ward_Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Admin_Ward_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -397,7 +397,7 @@ Interactive Map Made by Onkar Keskar!
             document.getElementById("menu").appendChild(div_Ward_Name);
             sel_Ward_Name = document.createElement('select');
             sel_Ward_Name.multiple = true;
-            sel_Ward_Name.size = 5;
+            sel_Ward_Name.size = 3;
             sel_Ward_Name.id = "sel_Ward_Name";
             var Ward_Name_options_str = "<option value='' unselected></option>";
             sel_Ward_Name.onchange = function(){filterFunc()};
@@ -489,7 +489,7 @@ Interactive Map Made by Onkar Keskar!
             lab_Ward_Name.className = 'filterlabel';
             div_Ward_Name.appendChild(lab_Ward_Name);
             var reset_Ward_Name = document.createElement('div');
-            reset_Ward_Name.innerHTML = 'Remove filter';
+            reset_Ward_Name.innerHTML = 'Remove Filter';
             reset_Ward_Name.className = 'filterlabel';
             reset_Ward_Name.onclick = function() {
                 var options = document.getElementById("sel_Ward_Name").options;
@@ -507,7 +507,7 @@ Interactive Map Made by Onkar Keskar!
             document.getElementById("menu").appendChild(div_Region);
             sel_Region = document.createElement('select');
             sel_Region.multiple = true;
-            sel_Region.size = 2;
+            sel_Region.size = 3;
             sel_Region.id = "sel_Region";
             var Region_options_str = "<option value='' unselected></option>";
             sel_Region.onchange = function(){filterFunc()};
@@ -520,7 +520,7 @@ Interactive Map Made by Onkar Keskar!
             lab_Region.className = 'filterlabel';
             div_Region.appendChild(lab_Region);
             var reset_Region = document.createElement('div');
-            reset_Region.innerHTML = 'Remove filter';
+            reset_Region.innerHTML = 'Remove Filter';
             reset_Region.className = 'filterlabel';
             reset_Region.onclick = function() {
                 var options = document.getElementById("sel_Region").options;
