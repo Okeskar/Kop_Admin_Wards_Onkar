@@ -1,11 +1,18 @@
-Interactive Map IS IN PROGRESS
 <!doctype html>
 <html lang="en">
     <head>
+	    
+	<!-- Add the necessary libraries -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
 			<title>Interactive Map IS IN PROGRESS</title>
+	
 	<div id="map">
-	<button id="downloadButton" onclick="downloadMapAsPDF()">Download the PDF</button>
+		<!-- Add the download button -->
+		<button id="downloadButton" onclick="downloadMapAsPDF()">Download the PDF</button>
 	</div>
+	    	
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=2,width=device-width">
@@ -15,7 +22,7 @@ Interactive Map IS IN PROGRESS
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/filter.css">
-		<link rel="stylesheet" href="css/nouislider.min.css">
+	<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -36,8 +43,7 @@ Interactive Map IS IN PROGRESS
 	
 	<script>
 		
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
-	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -55,8 +61,9 @@ Interactive Map IS IN PROGRESS
 	<script src="js/wNumb.js"></script>
         <script src="data/Boundary_1.js"></script>
         <script src="data/Admin_Ward_2.js"></script>
+	
         
-		<script>
+	<script>
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
