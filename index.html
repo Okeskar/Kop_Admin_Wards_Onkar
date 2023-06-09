@@ -541,5 +541,34 @@ Interactive Map Made by Onkar Keskar!
             resetLabels([layer_Admin_Ward_2]);
         });
         </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.0/jspdf.umd.min.js"></script>
+
+		// Include the jsPDF library
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.0/jspdf.umd.min.js"></script>
+
+// Function to download the image as a PDF
+		function downloadAsPDF() {
+// Create a new jsPDF instance
+		const doc = new jsPDF();
+
+// Get the map container element
+		const mapContainer = document.getElementById('map');
+
+// Use html2canvas library to capture the map container as an image
+		html2canvas(mapContainer).then(canvas => {
+// Convert the canvas to a data URL
+		const imgData = canvas.toDataURL('image/png');
+
+// Add the image to the PDF document
+		doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
+
+// Save the PDF document
+		doc.save('map.pdf');
+		});
+		}
+
+// Call the downloadAsPDF function when needed, e.g., on a button click
+
     </body>
 </html>
