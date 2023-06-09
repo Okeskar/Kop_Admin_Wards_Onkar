@@ -3,12 +3,6 @@ Interactive Map IS IN PROGRESS
 <html lang="en">
     <head>
 			<title>Interactive Map IS IN PROGRESS</title>
-	
-	
-		<div id="map">
-		<button id="downloadButton" onclick="downloadMapAsPDF()">Download PDF</button>
-		</div>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=2,width=device-width">
@@ -30,17 +24,18 @@ Interactive Map IS IN PROGRESS
             padding: 0;
             margin: 0;
 	}
-
-
         </style>
         <title>Admin Wards of Kolhapur City</title>
     </head>
     <body>
         <div id="map">
         </div>
-		<script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
-		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<div id="map">
+	<button id="downloadButton" onclick="downloadMapAsPDF()">Download the PDF</button>
+	</div>
+	<script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
@@ -54,8 +49,8 @@ Interactive Map IS IN PROGRESS
         <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet-search.js"></script>
         <script src="js/tailDT.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/wNumb.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/wNumb.js"></script>
         <script src="data/Boundary_1.js"></script>
         <script src="data/Admin_Ward_2.js"></script>
         
