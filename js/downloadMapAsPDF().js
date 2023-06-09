@@ -6,11 +6,12 @@ function downloadMapAsPDF() {
   const doc = new jsPDF('landscape');
 
   // Convert the map element to an image using html2canvas
-  html2canvas(mapElement).then(function (canvas) {
+  html2canvas(mapElement).then(function (canvas) 
+{
     const imageData = canvas.toDataURL('image/jpeg');
 
     // Add the image to the PDF
-    doc.addImage(imageData, 'JPEG', 10, 10, 250, 180);
+    doc.addImage('imageData', 'JPEG', 20, 20, 500, 360);
 
     // Save the PDF
     doc.save('map.pdf');
